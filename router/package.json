@@ -1,0 +1,11 @@
+{
+  "name": "approuter",
+  "description": "Node.js based application router service for html5-apps",
+  "dependencies": {
+    "@sap/approuter": "^10.10.1",
+    "axios": "^1.8.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

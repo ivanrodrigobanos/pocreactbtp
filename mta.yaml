@@ -1,0 +1,67 @@
+ID: btp-webapp
+_schema-version: "2.1"
+version: 1.0.0
+
+modules:
+  - name: ReactWebApp
+    type: html5
+    path: webapp
+    build-parameters:
+      builder: custom
+      buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+      commands:
+        - npm run build-btp
+      supported-platforms: []
+  - name: webapp_deployer
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: webapp_repo_host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - webapp-content.zip
+          name: ReactWebApp
+          target-path: resources/
+  - name: webapp_router
+    type: approuter.nodejs
+    path: router
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: webapp_repo_runtime
+      - name: webapp_conn
+      - name: webapp_destination
+      - name: webapp_uaa
+resources:
+  - name: webapp_repo_host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: webapp_repo_runtime
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: webapp_destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: lite
+      service: destination
+      path: ./destination.json
+  - name: webapp_uaa
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+    type: org.cloudfoundry.managed-service
+  - name: webapp_conn
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: lite
+      service: connectivity

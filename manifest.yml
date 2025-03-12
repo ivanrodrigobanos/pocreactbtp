@@ -1,0 +1,7 @@
+---
+applications:
+  - name: pocreactbtp
+path: webapp/build/
+instances: 1
+buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+memory: 256M

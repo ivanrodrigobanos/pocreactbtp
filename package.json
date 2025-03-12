@@ -1,0 +1,13 @@
+{
+  "name": "btp-webapp",
+  "description": "My Web app on BTP",
+  "dependencies": {
+    "mbt": "^1.2.7"
+  },
+  "scripts": {
+    "clean": "npx rimraf mta_archives resources",
+    "build": "npm run clean && mbt build",
+    "deploy": "cf push mta_archives/btp-webapp_1.0.0.mtar"
+  },
+  "version": "1.0.0"
+}
