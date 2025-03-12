@@ -1,54 +1,13 @@
-# React + TypeScript + Vite
+# Objetivo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esto es una aplicación React Vite + Typescript para probar el deploy en BTP siguiendo estos blogs:
 
-Currently, two official plugins are available:
+https://community.sap.com/t5/technology-blogs-by-sap/develop-and-deploy-a-html-angular-vue-react-app-on-sap-btp-cloud-foundry/ba-p/13565139
+https://community.sap.com/t5/technology-blogs-by-members/how-to-build-end-to-end-custom-applications-in-cloud-foundry/ba-p/13485823
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+No funciona siempre devuelve el error: Failed to create default route from app name: Host must be either "\*" or contain only alphanumeric characters, "\_", or "-"
 
-## Expanding the ESLint configuration
+Y no consigo solucionarlo. Y lo que veo en google supuestamente lo tengo bien.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+La unica que funciona es esta: https://community.sap.com/t5/technology-blogs-by-sap/deploy-your-reactjs-application-in-cloud-foundry/ba-p/13464100
+Que es la misma que indica este tutorial de sap: https://developers.sap.com/group.btp-cf-buildpacks.html (aunque es version para java pero la configuracion de ficheros es la misma que en el blog anterior).
